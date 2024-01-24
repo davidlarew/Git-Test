@@ -1,1 +1,1 @@
-# theatre - test repo for Javascript class
+# Git-Test - test repo for Javascript class
