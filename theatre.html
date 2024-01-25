@@ -1,30 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
-    <title>Magical Mystery Theater</title>
-</head>
+    <title>Magical Mystery Theater ~ David Larew</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+ </head>
+
 <body>
-    <h1>Magical Mystery Theater</h1>
-    <button type="button" onclick="buyTicket()">Purchase Ticket</button>
+    <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+     <div class="card" style="width: 18rem;">
+       <div class="card-body">
+          <h5 class="card-title">Welcome to the Magical Mystery Theatre</h5>
+          <p class="card-text">Please, enter your age and matinee information, yes or no.</p>
+         <button class="btn btn-primary" type="button" onclick="buyTicket()">Purchase Ticket</button>
+        </div>
+      </div>
+    </div> 
+
     <script>
 
         const GENERAL_ADMISSION_TICKET_COST = 20;
         const CHILD_AND_SENIOR_TICKET_COST = 10;
+        const MATINEE_DISCOUNT = 3;
 
         function buyTicket() {
-            const age= prompt('What is your age?');
+            const age = prompt('What is your age?');
+            const isMatinee = prompt('Are you attending a matinee show?').toLowerCase();
 
-            let cost = GENERAL_ADMISSION_TICKET_COST;
 
 
-            if ((age <= 12) || (age >= 65)) {
-                cost = CHILD_AND_SENIOR_TICKET_COST;
-            }
 
+            //let cost = GENERAL_ADMISSION_TICKET_COST;
+            let cost = getBaseTicketCost(age);
+
+            cost = applyMatineeDiscount(cost, isMatinee);
+            /*
+                        if ((age <= 12) || (age >= 65)) {
+                            cost = CHILD_AND_SENIOR_TICKET_COST;
+                        }
+            */
+         
             alert('Your ticket will cost: $' + cost);
 
         }
+
+        function getBaseTicketCost(age) {
+            if ((age <= 12) || (age >= 65)) {
+                return CHILD_AND_SENIOR_TICKET_COST;
+            }
+            return GENERAL_ADMISSION_TICKET_COST;
+        }
+
+        function applyMatineeDiscount(cost,isMatinee){
+            if ((isMatinee === 'yes') || (isMatinee === 'y')) {
+                //cost = cost - MATINEE_DISCOUNT;
+                return cost - MATINEE_DISCOUNT; // + " applyMatDis";
+            }
+            return cost; // + " don't applyMatDis";
+        }
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
+
 </html>
