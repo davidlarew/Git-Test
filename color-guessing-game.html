@@ -1,80 +1,530 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Color Guessing Game</title>
-  </head>
-  <body>
-    <button type="button" onclick="runGame()">runGame!</button>
 
-    <script>
-      const COLORS_ARRAY = [
-        "blue",
-        "cyan",
-        "gold",
-        "gray",
-        "green",
-        "magenta",
-        "orange",
-        "red",
-        "white",
-        "yellow",
-      ];
-      runGame = () => {
-        const targetIndex =
-          Math.floor(Math.random(COLORS_ARRAY.length) * 10) + 1;
-        const target = COLORS_ARRAY[targetIndex];
-        console.log(target);
-        alert(target);
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Color Guessing Game</title>
+</head>
 
-        let guess = "";
-        let correct = false;
-        let numTries = 0;
+<body>
+  <button type="button" onclick="runGame()">runGame!</button>
 
-        console.log(targetIndex);
+  <script>
+    const COLORS_ARRAY = [
+      "blue",
+      "cyan",
+      "gold",
+      "gray",
+      "green",
+      "magenta",
+      "orange",
+      "red",
+      "white",
+      "yellow",
+    ];
+    runGame = () => {
+      const targetIndex =
+        Math.floor(Math.random(COLORS_ARRAY.length) * 10) + 1;
+      const target = COLORS_ARRAY[targetIndex];
+      console.log(target);
+      alert(target);
 
-        do {
-          guess = prompt(
-            "I am thinking of one of these colors:\n\n" +
-              COLORS_ARRAY.join(" , ") +
-              "\n\nWhat color am I thinking of?\n"
-          );
-          if (guess === null) {
-            alert("You are leaving the game!");
+      let guess = "";
+      let correct = false;
+      let numTries = 0;
 
-            return;
-          }
+      console.log(targetIndex);
 
-          numTries += 1;
-          correct = checkGuess(guess, target);
-        } while (!correct);
-
-        alert(
-          `Congratulations, you got it right. You guessed in ${numTries} tries`
+      do {
+        guess = prompt(
+          "I am thinking of one of these colors:\n\n" +
+          COLORS_ARRAY.join(" , ") +
+          "\n\nWhat color am I thinking of?\n"
         );
+        if (guess === null) {
+          alert("You are leaving the game!");
 
-        document.body.style.background = guess;
-      };
-
-      function checkGuess(guess, target) {
-        let correct = false;
-        let guessIncludes = COLORS_ARRAY.includes(guess);
-
-        if (!COLORS_ARRAY.includes(guess)) {
-          alert("That's not in the array");
-        } else if (guess > target) {
-          alert("Guess is higher than the target color!");
-        } else if (guess < target) {
-          alert("Guess is lower than target color!");
-        } else {
-          correct = true;
+          return;
         }
 
-        return correct;
+        numTries += 1;
+        correct = checkGuess(guess, target);
+      } while (!correct);
 
-        console.log(guessIncludes);
+      alert(
+        `Congratulations, you got it right. You guessed in ${numTries} tries`
+      );
+
+      document.body.style.background = guess;
+    };
+
+    function checkGuess(guess, target) {
+      let correct = false;
+      let guessIncludes = COLORS_ARRAY.includes(guess);
+
+      if (!COLORS_ARRAY.includes(guess)) {
+        alert("That's not in the array");
+      } else if (guess > target) {
+        alert("Guess is higher than the target color!");
+      } else if (guess < target) {
+        alert("Guess is lower than target color!");
+      } else {
+        correct = true;
       }
-    </script>
-  </body>
+
+      return correct;
+
+      console.log(guessIncludes);
+    }
+
+
+
+
+    // 3 - shopping cart
+    const contents = [];
+    //const addItem = [];
+    function cart(item) {
+      contents = addItem(item);
+    }
+
+    function addItem(item) {
+      //console.log(`The cart contains:", cart.contents`);
+    }
+
+
+
+    // your code here - uncomment the two lines below this object when done
+    ;
+    cart.addItem("laptop");
+    console.log("The cart contains:", cart.contents);
+
+    class Monster {
+      constructor(type, color) {
+        this.type = type;
+        this.color = color;
+        this.isScary = true;
+      }
+      roar() {
+        console.log(`The ${this.color} ${this.type} lets out a tremendous roar!`);
+      }
+    }
+
+    class Dragon extends Monster {
+      constructor(type, color, element) {
+        super(type, color);
+        this.element = element;
+      }
+      fly() {
+        console.log(`The ${this.color} ${this.element} ${this.type} flaps its wings and begins to fly.`);
+      }
+      swoop() {
+        console.log(`The ${this.color} ${this.type} swoops in for the kill!`);
+      }
+    }
+
+    class Werewolf extends Monster {
+      constructor(type, color) {
+        super(type, color);
+      }
+      howl() {
+        console.log(`The ${this.type} howls loudly.`);
+      }
+    }
+
+    const woodDragon = new Dragon("dragon", "brown", "wood");
+    woodDragon.roar();
+    woodDragon.fly();
+    woodDragon.swoop();
+
+    const werewolf1 = new Werewolf("werewolf", "cyan");
+    werewolf1.howl();
+
+    class Zombie extends Monster {
+      constructor(type, color, level) {
+        super(type, color);
+        this.level = level;
+      }
+      brainMunch() {
+        console.log(`The level ${this.level} ${this.type} effortlessly swept you off your feet and had its way with your brains...`);
+      }
+    }
+
+    const zombee = new Zombie("zombie", "dark blue", "50");
+    zombee.brainMunch();
+
+
+    // Task 1: Validate Username
+    function validateUsername(username) {
+      // Write code to check if the username is at least 5 characters long.
+      // If the username is not valid, throw an error with a message.
+      if (username.length < 5) {
+        throw new Error("Username must be at least 5 characters");
+      }
+    }
+    // Task 2: Validate Password
+    function validatePassword(password) {
+      // Write code to check if the password is at least 8 characters long and contains at least one number.
+      // If the password is not valid, throw an error with a message.
+      let num = /[0-8]/g;
+      if (password.length < 8) {
+        throw new Error("password must contain 8 ormore characters.");
+      } else if (!hasNum.test(password)) {
+        throw new Error("Pass word must contain a number.");
+      }
+    }
+
+    // Task 3: Validate Email
+    function validateEmail(email) {
+      // Write code to check if the email contains an '@' symbol.
+      // If the email is not valid, throw an error with a message.
+      if (!email.includes('@')) {
+        throw new Error("Email must contain @.");
+      }
+    }
+
+    // Task 4: Validate User
+    function validateUser(user) {
+      // Use the above validation functions to validate the user's username, password, and email.
+      // If any validation fails, log the error and return false. Otherwise, return true.
+      try {
+        validateUsername(user.username);
+        validatePassword(user.password);
+        validateEmail(user.email);
+        return true;
+      } catch (err) {
+        console.error(err.message);
+      }
+    }
+
+
+
+
+
+
+
+
+
+
+    //----------------------------- TESTS --------------------------------------------
+    // Do not modify the below code -- this is test code that will help you determine if you completed each task correctly. Be sure to open the console to see the test messages.
+
+    //test function
+    /*
+    function testValidation() {
+      function runTest(description, testFunc, expectError = false) {
+        try {
+          const result = testFunc();
+          if (expectError) {
+            console.error(`${description} failed. Expected an error but did not receive one.`);
+          } else if (result) {
+            console.log(`${description} passed.`);
+          } else {
+            console.error(`${description} failed.`);
+          }
+        } catch (e) {
+          if (expectError) {
+            console.log(`${description} passed. Received an expected error.`);
+          } else {
+            console.error(`${description} threw an unexpected error:`, e.message);
+          }
+        }
+      }
+
+      //test case data - these are objects!
+      const user1 = { username: "john", password: "Password1", email: "john@example.com" }; //should fail (username)
+      const user2 = { username: "janedoe", password: "Password", email: "jane@example.com" }; //should fail (password missing number)
+      const user3 = { username: "juliadoe", password: "Pword1", email: "julia@example.com" }; //should fail (password too short)
+      const user4 = { username: "jamaldoe", password: "Password1", email: "jamal.example.com" }; //should fail (email)
+
+      //tests
+      runTest("Username validation - short username", () => validateUsername(user1.username), true); // Expects an error
+      runTest("Password validation - missing number", () => validatePassword(user2.password), true); // Expects an error
+      runTest("Password validation - too short", () => validatePassword(user3.password), true); // Expects an error
+      runTest("Email validation - missing @ symbol", () => validateEmail(user4.email), true); // Expects an error
+      runTest("User validation", () => {
+        return !validateUser(user1) && // short username, expects an error
+          !validateUser(user2) && // missing number in password, expects an error
+          !validateUser(user3) && // password too short, expects an error
+          !validateUser(user4);   // missing @ in email, expects an error
+      });
+    }
+
+    console.clear();
+    testValidation();
+
+
+    class Monster {
+      constructor(type, color) {
+        this.type = type;
+        this.color = color;
+        this.isScary = true;
+      }
+      roar() {
+        console.log(`The ${this.color} ${this.type} lets out a tremendous roar!`);
+      }
+    }
+
+    class Dragon extends Monster {
+      constructor(type, color, element) {
+        super(type, color);
+        this.element = element;
+      }
+      fly() {
+        console.log(`The ${this.color} ${this.element} ${this.type} flaps its wings and begins to fly.`);
+      }
+    }
+
+    class Werewolf extends Monster {
+      constructor(type, color) {
+        super(type, color);
+      }
+      howl() {
+        console.log(`The ${this.type} howls loudly.`);
+      }
+    }
+
+    const woodDragon = new Dragon("dragon", "brown", "wood");
+
+
+
+
+    /////////////////////////////////////
+
+    class Monster {
+      constructor(type, color) {
+        this.type = type;
+        this.color = color;
+        this.isScary = true;
+      }
+      roar() {
+        console.log(`The ${this.color} ${this.type} lets out a tremendous roar!`);
+      }
+    }
+
+    class Dragon extends Monster {
+      constructor(type, color, element) {
+        super(type, color);
+        this.element = element;
+      }
+      fly() {
+        console.log(`The ${this.color} ${this.element} ${this.type} flaps its wings and begins to fly.`);
+      }
+      fireBreathing() {
+        console.log(`The ${this.color} ${this.type} breathes fire like a flamethrower.`);
+      }
+    }
+
+    class Werewolf extends Monster {
+      constructor(type, color) {
+        super(type, color);
+      }
+      howl() {
+        console.log(`The ${this.type} howls loudly.`);
+      }
+    }
+
+    class Dracula extends Monster {
+      constructor(type, color, bloodtype) {
+        super(type, color);
+        this.bloodtype = bloodtype;
+      }
+      bloodLust() {
+        console.log(`${this.type} likes your ${this.bloodtype}  blood ...`);
+      }
+    }
+
+
+
+
+
+
+
+
+    const woodDragon = new Dragon("dragon", "brown", "wood");
+    //const werewolf1 = new Werewolf("werewolf", "red", howl());
+
+    woodDragon.roar();
+    woodDragon.fly();
+    woodDragon.fireBreathing();
+
+    const werewolf1 = new Werewolf("werewolf", "purple");
+    werewolf1.howl();
+
+    const dracula = new Dracula("Dracula", "black", " B Negative ");
+    dracula.bloodLust();
+
+
+
+    /////////////////////////////////
+
+
+
+
+    async function fetchHero() {
+  /* This line below is fetching data from a website API. You haven't learned how to do this just yet, so here's a short explanation of what it does:
+  - 'fetch' is the function that sends a query to the website url, in this case this website https://www.superheroapi.com.
+  - 'await' tells JavaScript that the answer won't come back immediately and it needs to wait for it.
+  - 'then' tells JavaScript what to do with the website answer when it comes back
+  - 'response' is what the website sends back. We then use the text() function to get the text result. Note that the json() function would return a well formed JSON JavaScript Object.
+  */
+  
+  const hero = await fetch('https://www.superheroapi.com/api.php/1079471338910705/731')
+    .then((response) => response.text())
+  
+  /**** Step 1: print in the console the value of 'hero'. Check that it is a JSON in a string format. ****/
+  console.log(hero)
+
+  /**** Step 2: transform this string into a JavaScript Object and console.log it ****/
+  let obj = JSON.parse(hero);
+  console.log(obj)
+  
+  /**** Step 3: using the function alert, display the name and the eye color of the Hero ****/
+  alert(`Hero Name: ${obj.name}, Eye Color: ${obj.appearance['eye-color']}`);
+
+  /**** Step 4: create a new constant named 'myHero' following the same format. Same fields can be set as 'null' ****/
+  const myHero = {
+  "response": "success",
+  "id": "731",
+  "name": "Mooz",
+  "powerstats": {
+    "intelligence": "50",
+    "strength": "10",
+    "speed": "100",
+    "durability": "28",
+    "power": "100",
+    "combat": "28"
+  },
+  "biography": {
+    "full-name": "Hunter Zolomon",
+    "alter-egos": "No alter egos found.",
+    "aliases": [
+      "-"
+    ],
+    "place-of-birth": "-",
+    "first-appearance": "Flash Secret Files #3",
+    "publisher": "DC Comics",
+    "alignment": "bad"
+  },
+  "appearance": {
+    "gender": "Male",
+    "race": "null",
+    "height": [
+      "6'1",
+      "185 cm"
+    ],
+    "weight": [
+      "181 lb",
+      "81 kg"
+    ],
+    "eye-color": "Red",
+    "hair-color": "Brown"
+  },
+  "work": {
+    "occupation": "-",
+    "base": "Keystone City, Kansas"
+  },
+  "connections": {
+    "group-affiliation": "Secret Society of Super Villains, formerly Keystone Police Department, F.B.I.",
+    "relatives": "Ashley Zolomon (ex-wife)"
+  },
+  "image": {
+    "url": "https://www.superherodb.com/pictures2/portraits/10/100/1384.jpg"
+  }
+};
+
+  /**** Step 5: create a new 'heroes' array and add both 'hero' and 'myHero' to it. Then create a stringified version of the array it using the JSON.stringify function, and console.log() it. ****/
+  const heroes = [hero, myHero];
+  console.log(JSON.stringify(heroes))
+
+}
+
+fetchHero()
+
+
+
+async function fetchHero() {
+  /* This line below is fetching data from a website API. You haven't learned how to do this just yet, so here's a short explanation of what it does:
+  - 'fetch' is the function that sends a query to the website url, in this case this website https://www.superheroapi.com.
+  - 'await' tells JavaScript that the answer won't come back immediately and it needs to wait for it.
+  - 'then' tells JavaScript what to do with the website answer when it comes back
+  - 'response' is what the website sends back. We then use the text() function to get the text result. Note that the json() function would return a well formed JSON JavaScript Object.
+  */
+  
+  const hero = await fetch('https://www.superheroapi.com/api.php/1079471338910705/731')
+    .then((response) => response.text())
+  
+  /**** Step 1: print in the console the value of 'hero'. Check that it is a JSON in a string format. ****/
+  console.log(hero)
+
+  /**** Step 2: transform this string into a JavaScript Object and console.log it ****/
+  let obj = JSON.parse(hero);
+  console.log(obj)
+  
+  /**** Step 3: using the function alert, display the name and the eye color of the Hero ****/
+  //alert(`Hero Name: ${obj.name}, Eye Color: ${obj.appearance['eye-color']}`);
+
+  /**** Step 4: create a new constant named 'myHero' following the same format. Same fields can be set as 'null' ****/
+  const myHero = {
+  "response": "success",
+  "id": "999",
+  "name": "Solomon Grundy Jr",
+  "powerstats": {
+    "intelligence": "10",
+    "strength": "100",
+    "speed": "10",
+    "durability": "80",
+    "power": "100",
+    "combat": "80"
+  },
+  "biography": {
+    "full-name": "Solomon Grundy Jr",
+    "alter-egos": "No alter egos found.",
+    "aliases": [
+      "-"
+    ],
+    "place-of-birth": "Swamp",
+    "first-appearance": "DC 12",
+    "publisher": "DC Comics",
+    "alignment": "bad"
+  },
+  "appearance": {
+    "gender": "Male",
+    "race": "null",
+    "height": [
+      "6'10",
+      "208 cm"
+    ],
+    "weight": [
+      "280 lb",
+      "127 kg"
+    ],
+    "eye-color": "Black",
+    "hair-color": "Gray"
+  },
+  "work": {
+    "occupation": "-",
+    "base": "Lake Martin, Louisiana "
+  },
+  "connections": {
+    "group-affiliation": "Secret Society of Super Villains",
+    "relatives": "Solomon Grundy Sr"
+  },
+  "image": {
+    "url": "https://www.superherodb.com/pictures2/portraits/10/100/1.jpg"
+  }
+};
+
+  /**** Step 5: create a new 'heroes' array and add both 'hero' and 'myHero' to it. Then create a stringified version of the array it using the JSON.stringify function, and console.log() it. ****/
+  const heroes = [hero, myHero];
+  console.log(JSON.stringify(heroes))
+
+}
+
+fetchHero()
+
+*/
+  </script>
+</body>
+
 </html>
